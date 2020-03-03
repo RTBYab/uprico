@@ -1,12 +1,13 @@
 import axios from "axios";
 import { setAlert } from "../actions/alert";
 import {
-  REGISTER_FAIL,
-  REGISTER_SUCCESS,
-  USER_LOADED,
-  AUTH_FAIL,
+  LOGOUT,
   LOGIN_FAIL,
-  LOGIN_SUCCESS
+  AUTH_FAIL,
+  USER_LOADED,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  REGISTER_SUCCESS
 } from "../actions/index";
 import setAuthToken from "../../utils/setAuthToken";
 
@@ -85,4 +86,10 @@ export const login = (email, password) => async dispatch => {
       type: LOGIN_FAIL
     });
   }
+};
+
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
 };

@@ -17,7 +17,6 @@ const App = () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
       const decodedData = decode(localStorage.token);
-      console.log("dddddd", decodedData._id);
       store.dispatch(loadUser(decodedData._id));
     }
   }, []);

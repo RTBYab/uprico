@@ -3,7 +3,8 @@ import {
   REGISTER_SUCCESS,
   USER_LOADED,
   // AUTH_FAIL,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT
   // LOGIN_FAIL
 } from "../actions/index";
 
@@ -34,8 +35,7 @@ export default function(state = initialState, action) {
         loading: false
       };
     case REGISTER_FAIL:
-      // case LOGIN_FAIL:
-      // case AUTH_FAIL:
+    case LOGOUT:
       localStorage.removeItem("token");
       return {
         ...state,
