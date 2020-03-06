@@ -1,17 +1,19 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../redux/actions/auth";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const authLink = (
     <ul>
       <li>
         <a onClick={logout} href="#!">
-          <span className="hide-sm">خروج</span>
           <i className="fas fa-sign-out-alt"></i>{" "}
         </a>
+      </li>
+      <li>
+        <Link to="/dashboard">کسب وکار من</Link>
       </li>
     </ul>
   );
@@ -19,10 +21,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLink = (
     <ul>
       <li>
-        <NavLink to="/register">ثبت فروشگاه</NavLink>
+        <Link to="/register">ثبت فروشگاه</Link>
       </li>
       <li>
-        <NavLink to="hi">ثبت منتقد</NavLink>
+        <Link to="/hi">ثبت منتقد</Link>
       </li>
     </ul>
   );
@@ -30,11 +32,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className="navbar bg-dark">
       <h1>
-        <NavLink to="/">اپریکو</NavLink>
+        <Link to="/">اپریکو</Link>
       </h1>
-      {!loading && (
-        <Fragment>{isAuthenticated ? authLink : guestLink}</Fragment>
-      )}
+      {<Fragment>{isAuthenticated ? authLink : guestLink}</Fragment>}
     </nav>
   );
 };

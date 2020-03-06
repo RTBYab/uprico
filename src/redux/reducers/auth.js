@@ -4,7 +4,8 @@ import {
   USER_LOADED,
   // AUTH_FAIL,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PROFILE
   // LOGIN_FAIL
 } from "../actions/index";
 
@@ -12,7 +13,8 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
+  redirect: false
 };
 
 export default function(state = initialState, action) {
@@ -26,6 +28,13 @@ export default function(state = initialState, action) {
         user: payload
       };
     case REGISTER_SUCCESS:
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: false,
+        loading: false,
+        redirect: true
+      };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
       return {
@@ -36,6 +45,7 @@ export default function(state = initialState, action) {
       };
     case REGISTER_FAIL:
     case LOGOUT:
+    case CLEAR_PROFILE:
       localStorage.removeItem("token");
       return {
         ...state,

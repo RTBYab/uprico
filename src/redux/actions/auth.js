@@ -5,6 +5,7 @@ import {
   LOGIN_FAIL,
   AUTH_FAIL,
   USER_LOADED,
+  CLEAR_PROFILE,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   REGISTER_SUCCESS
@@ -13,11 +14,12 @@ import setAuthToken from "../../utils/setAuthToken";
 
 // LOAD USER
 export const loadUser = id => async dispatch => {
+  console.log("iiii", id);
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get(`http://localhost:8080/api//cuser/${id}`);
+    const res = await axios.get(`http://localhost:8080/api/cuser/${id}`);
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -89,6 +91,9 @@ export const login = (email, password) => async dispatch => {
 };
 
 export const logout = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
   dispatch({
     type: LOGOUT
   });

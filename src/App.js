@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => {
   useEffect(() => {
+    // console.log(store.getState().auth.id, "ooooo");
     if (localStorage.token) {
       setAuthToken(localStorage.token);
       const decodedData = decode(localStorage.token);
