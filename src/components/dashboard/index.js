@@ -1,15 +1,22 @@
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import Grid from "../grid";
+import Grid from "../grid/index";
 import React, { useEffect, Fragment } from "react";
+import { getPosts } from "../../redux/actions/post";
 import { getStoreByStoreOwner } from "../../redux/actions/store";
 
-const Dashboard = ({ getStoreByStoreOwner, auth: { user }, store }) => {
+const Dashboard = ({
+  getStoreByStoreOwner,
+  auth: { user },
+  store,
+  getPosts
+}) => {
   const id = user._id;
   useEffect(() => {
+    getPosts(id);
     getStoreByStoreOwner(id);
-  }, [getStoreByStoreOwner, id]);
+  }, [getStoreByStoreOwner, getPosts, id]);
 
   return store.loading && store === null ? (
     <Spinner />
@@ -25,9 +32,10 @@ const Dashboard = ({ getStoreByStoreOwner, auth: { user }, store }) => {
   );
 };
 Dashboard.prototype = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  getPosts: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -35,4 +43,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getStoreByStoreOwner })(Dashboard);
+export default connect(mapStateToProps, { getStoreByStoreOwner, getPosts })(
+  Dashboard
+);

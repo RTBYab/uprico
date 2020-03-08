@@ -1,29 +1,47 @@
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Const from "../../utils/constants";
+import { getPosts } from "../../redux/actions/post";
+import { Link } from "react-router-dom";
+import React, { Fragment } from "react";
 
-const Grid = ({ store: { store }, auth: { user } }) => {
+const Grid = ({ store: { store }, auth: { user }, post, getPosts }) => {
   const helperRender = () => {
     if (user._id === store.storeOwner) {
       return <div>Your are the owner</div>;
     }
   };
+
   return (
-    <Fragment className="row">
-      <div className="column">Hi</div>
-      <div className="column">Hello</div>
-      <div className="column">{store.address}</div>
+    <div>
+      <Fragment className="row">
+        {post.posts.map(post => (
+          <div class="column">
+            <Link to={`/details/${post._id}`}>
+              <img
+                className="grid-image"
+                key={post._id}
+                src={Const.URL.Posts + `${user._id}/${post.photo}`}
+                alt={post.title}
+              />
+            </Link>
+          </div>
+        ))}
+      </Fragment>
       {helperRender()}
-    </Fragment>
+    </div>
   );
 };
 
 Grid.propTypes = {
   auth: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
+  getPosts: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   store: state.store,
-  auth: state.auth
+  auth: state.auth,
+  post: state.post
 });
-export default connect(mapStateToProps, null)(Grid);
+export default connect(mapStateToProps, { getPosts })(Grid);

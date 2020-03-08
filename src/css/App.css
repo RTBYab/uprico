@@ -771,13 +771,21 @@ button {
 
 /* grid */
 .column {
-  float: left;
+  display: flex;
+  float: right;
   width: 33.33%;
 }
 
 /* Clear floats after the columns */
-.row:after {
+.row {
   content: "";
   display: table;
   clear: both;
+}
+
+.grid-image {
+  margin: 0.5%;
+  height: 280px; /* SET THIS */
+  object-fit: cover;
+  overflow: hidden;
 }

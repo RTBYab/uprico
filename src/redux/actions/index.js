@@ -26,3 +26,13 @@ export const UPLOAD_STORE_IMAGE = "UPLOAD_STORE_IMAGE";
 export const UPDATE_STORE_DETAILS = "UPDATE_STORE_DETAILS";
 export const GET_STORE_BY_OWNER_ID = "GET_STORE_BY_OWNER_ID ";
 export const GET_STORE_PROFILE_PHOTO = "GET_STORE_PROFILE_PHOTO";
+
+// Post
+export const GET_POST = "GET_POST";
+export const ADD_POST = "ADD_POST";
+export const GET_POSTS = "GET_POSTS";
+export const POST_ERROR = "POST_ERROR";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_POST = "DELETE_POST";
+export const UPDATE_LIKES = "UPDATE_LIKES";
+export const DELETE_COMMENT = "DELETE_COMMENT";
